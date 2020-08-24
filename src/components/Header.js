@@ -39,7 +39,7 @@ class Header extends React.Component {
                 <span className="navbar-text">
                     {isAuthenticated ?
                         this.renderUser() :
-                        <Link to='/registration'> Sign-in</Link>
+                        <Link to='/login'> Sign-in</Link>
                     }
                 </span>
             </nav >

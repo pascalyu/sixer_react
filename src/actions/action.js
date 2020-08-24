@@ -7,7 +7,8 @@ import {
     OFFER_LIST_REQUEST,
     OFFER_LIST_RECEIVE,
     OFFER_LIST_ERROR,
-    USER_REGISTER_SUCCESS
+    USER_REGISTER_SUCCESS,
+    USER_LOGIN_SUCCESS
 
 } from "./constants"
 import { SubmissionError } from "redux-form";
@@ -103,10 +104,16 @@ export const userLogout = () => {
 
 }
 
+export const userLoginSuccesss = (token, userId) => ({
+    type: USER_LOGIN_SUCCESS,
+    token,
+    userId
+});
+
 export const userLoginAttempt = (username, password) => {
     return (dispatch) => {
         return requests.post(`/login_check`, { username, password }, false)
-            .then(response => { dispatch(userRegisterCompleted(response)); })
+            .then(response => { dispatch(userLoginSuccesss(response.token, response.id)); })
             .catch(error => {
                 throw new SubmissionError(
                     parseApiErrors(error))
